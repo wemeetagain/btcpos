@@ -19,7 +19,7 @@ The typical interaction in a business would be as follows:
 The materials used are:
 -Raspberry Pi
 -3.2” LCD RCA output Monitor
--14x2 character LED display
+-2x16 character LED display
 -USB numpad
 -12v 1a power supply
 -Raspberry Pi enclosure
@@ -33,7 +33,7 @@ The Code:
 -Python-requests
     -web requests
 -Python-qrencode
--16x2 character library
+-2x16 character library
 -tkInter - graphics
 -Blockchain.info API
     -create new bitcoin addresses

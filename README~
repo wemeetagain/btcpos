@@ -1,6 +1,6 @@
 Bitcoin POS
 
-The idea was to build a simple all-in-one solution for small businesses wanting to accept bitcoin. I use cheap, easily available components to build the minimal setup necessary to accept bitcoins at a register.
+The idea was to build a simple all-in-one solution for small businesses wanting to accept bitcoin. I used cheap, easily available components to build the minimal setup necessary to accept bitcoins at a register.
 
 The cashier types payment total on a numpad, a QR code is generated for the customer to scan, and a confirmation message is displayed when the payment is received.
 
