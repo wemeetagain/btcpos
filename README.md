@@ -34,14 +34,14 @@ The Codebase:
 * Raspbian
 * Python
 * Python-requests
-    -web requests
+   - web requests
 * Python-qrencode
 * 2x16 character library
 * tkInter - graphics
 * Blockchain.info API
-    -create new bitcoin addresses
-    -get the BTC/USD exchange rate
-    -send BTC to forwarding address
+   - create new bitcoin addresses
+   - get the BTC/USD exchange rate
+   - send BTC to forwarding address
 
 Steps to Build Device:
 ----------------------
@@ -56,34 +56,34 @@ Steps to Build Device:
 Steps to set up Software Environment:
 --------------------------------------
 * initial raspbian setup
--no ssh
--boot into graphical session
+   - no ssh
+   - boot into graphical session
 
 * install and configure needed software
 
     $ sudo apt-get update
     $ sudo apt-get install python-requests python-qrencode
 
--download pos files run.py, btcpos.py, lcd.py, bitcoin_accepted.gif to /home/pi (assuming user pi)
-- set run as executable
+   - download pos files run.py, btcpos.py, lcd.py, bitcoin_accepted.gif to /home/pi (assuming user pi)
+   - set run as executable
 
     $ chmod a+x run.py
 
 -open run.py and fill in lines identifier, password, and address with your blockchain identifier, password and the forwarding address with which to forward payments. Leave address as ‘’ to simply leave the payments in their respective addresses.
 
 * configure system to remove lxpanel, remove window decorations and autostart program
--open file /etc/xdg/lxsession/LXDE/autostart and remove the line that begins @ lxpanel
--open file ~/.config/openbox/lxde-rc.xml and add the following in between the <applications> block:
+   - open file /etc/xdg/lxsession/LXDE/autostart and remove the line that begins @ lxpanel
+   - open file ~/.config/openbox/lxde-rc.xml and add the following in between the <applications> block:
 
-    <application class “*”>
+    <application class "*">
      <decor>no</decor>
     </application>
 
--make directory for lxde autostarted programs if not already there
+   - make directory for lxde autostarted programs if not already there
 
     $ mkdir ~/.config/autostart
 
--create file ~/.config/autostart/run.desktop with the following:
+   - create file ~/.config/autostart/run.desktop with the following:
 
     [Desktop Entry]
     Type=Application
@@ -94,7 +94,7 @@ Security Considerations:
 * sending payments to a forwarding address currently defaults with a 0.0005BTC transaction fee
 * Don’t use a usb wireless adapter, use an ethernet cable. Using a wireless adapter is just asking for trouble from snoopers (even though all internet communication is supposedly encrypted over SSL)
 * Ideally, use an enclosure that doesn’t expose any ports to the pi.
-* Double check that forwarding address if you use it. ;)
+* Double check that forwarding address if you use it.
 * Payment is defaulted to be ‘confirmed’ by the device after the unconfirmed transaction is reported. Watch out for double-spends! You’d probably best not to use this for high value purchases.
 * All in all, I’d say the device is pretty experimental. It has worked well for me, and doesn’t seem to be glitchy in the slightest, but I would certainly use it at your own risk. ;)
 
