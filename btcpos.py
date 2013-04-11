@@ -76,8 +76,8 @@ class POS:
 		return balance	
 
 	#returns True or False if payment goes through or not
-	def sendPaymentToAddress(self,from_address,to_address,bitamount):
-		bitamount=str(int((float(bitamount)-0.0005) * 100000000)) #take out miner fee and convert to satoshi
+	def sendPaymentToAddress(self,from_address,to_address,bitamount,fee=0.0005):
+		bitamount=str(int((float(bitamount)-fee) * 100000000)) #take out miner fee and convert to satoshi
 		payload = {'password': self.passwd,'to' : to_address, 'from' :from_address,'amount':bitamount}
 		get_balance_url = 'https://blockchain.info/merchant/' + self.username + '/payment'
 		payment_message = False		
@@ -310,36 +310,52 @@ class POS:
 	
 	#executes the steps of a single transaction
 	def newTransaction(self):
-		self.setWaitingGUI()
-		self.initTransaction()
-		self.lcd.setTopLine('Payment Amount')
-		self.lcd.printLCD()
-		amount=self.getPaymentTotal()
-		self.lcd.setTopLine('Payment Entered')
-		self.lcd.printLCD()
-		address=self.getNewAddress()
-		bitamount=self.toBTC(amount)
-		image=self.getQRCode(address,bitamount)
-		self.clearGUI()
-		self.setPaymentGUI(image,address,bitamount,amount)
-		self.lcd.setTopLine('QR Code Ready')
-		self.lcd.printLCD()
-		confirmed=self.waitForPaymentOrCancel(address,bitamount)
-		self.clearGUI()
-		if confirmed:
-			self.lcd.setTopLine('Payment Approved')
+		try:
+			self.setWaitingGUI()
+			self.initTransaction()
+			self.lcd.setTopLine('Payment Amount')
 			self.lcd.printLCD()
-			self.setConfirmationGUI()
-			if self.out_address:
-				self.sendPaymentToAddress(address,self.out_address,bitamount)
-		else:
-			self.lcd.setTopLine('Payment Canceled')
+			amount=self.getPaymentTotal()
+			self.lcd.setTopLine('Payment Entered')
 			self.lcd.printLCD()
-			self.setCanceledGUI()
-		self.archiveAddress(address)
-		self.enter=False
-		self.waitForEnter()
-		self.clearGUI()
+			retries=3		
+			for x in range(retries):
+				address=self.getNewAddress()
+				if address:
+					break
+			for x in range(retries):
+				bitamount=self.toBTC(amount)
+				if bitamount:
+					break
+			if not address or not bitamount:
+				raise Exception('trouble accessing Blockchain')
+			image=self.getQRCode(address,bitamount)
+			self.clearGUI()
+			self.setPaymentGUI(image,address,bitamount,amount)
+			self.lcd.setTopLine('QR Code Ready')
+			self.lcd.printLCD()
+			confirmed=self.waitForPaymentOrCancel(address,bitamount)
+			self.clearGUI()
+			if confirmed:
+				self.lcd.setTopLine('Payment Approved')
+				self.lcd.printLCD()
+				self.setConfirmationGUI()
+				if self.out_address:
+					self.sendPaymentToAddress(address,self.out_address,bitamount)
+			else:
+				self.lcd.setTopLine('Payment Canceled')
+				self.lcd.printLCD()
+				self.setCanceledGUI()
+			self.archiveAddress(address)
+			self.enter=False
+			self.waitForEnter()
+			self.clearGUI()
+		except:
+			self.lcd.setTopLine('Network Error')
+			self.enter=False
+			self.waitForEnter()
+			self.clearGUI()
+			
 	
 	#main loop for transactions
 	def transactionLoop(self):
