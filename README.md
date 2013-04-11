@@ -69,7 +69,7 @@ Steps to set up Software Environment:
 
         $ chmod a+x run.py
 
--open run.py and fill in lines identifier, password, and address with your blockchain identifier, password and the forwarding address with which to forward payments. Leave address as ‘’ to simply leave the payments in their respective addresses.
+   - open run.py and fill in lines identifier, password, and address with your blockchain identifier, password and the forwarding address with which to forward payments. Leave address as ‘’ to simply leave the payments in their respective addresses.
 
 * configure system to remove lxpanel, remove window decorations and autostart program
    - open file /etc/xdg/lxsession/LXDE/autostart and remove the line that begins @ lxpanel
