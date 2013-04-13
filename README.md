@@ -81,7 +81,7 @@ Steps to set up Software Environment:
 
    - make directory for lxde autostarted programs if not already there
 
-        $ mkdir ~/.config/autostart
+            $ mkdir ~/.config/autostart
 
    - create file ~/.config/autostart/run.desktop with the following:
 
