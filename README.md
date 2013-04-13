@@ -67,17 +67,17 @@ Steps to set up Software Environment:
    - download pos files run.py, btcpos.py, lcd.py, bitcoin_accepted.gif to /home/pi (assuming user pi)
    - set run as executable
 
-        $ chmod a+x run.py
+            $ chmod a+x run.py
 
    - open run.py and fill in lines identifier, password, and address with your blockchain identifier, password and the forwarding address with which to forward payments. Leave address as ‘’ to simply leave the payments in their respective addresses.
 
 * configure system to remove lxpanel, remove window decorations and autostart program
    - open file /etc/xdg/lxsession/LXDE/autostart and remove the line that begins @ lxpanel
-   - open file ~/.config/openbox/lxde-rc.xml and add the following in between the &ltapplications&gt block:
+   - open file ~/.config/openbox/lxde-rc.xml and add the following in between the `<applications>` block:
 
-        <application class "*">
-            <decor>no</decor>
-        </application>
+            <application class "*">
+                <decor>no</decor>
+            </application>
 
    - make directory for lxde autostarted programs if not already there
 
@@ -85,9 +85,9 @@ Steps to set up Software Environment:
 
    - create file ~/.config/autostart/run.desktop with the following:
 
-        [Desktop Entry]
-        Type=Application
-        Exec=sudo /home/pi/run.py
+            [Desktop Entry]
+            Type=Application
+            Exec=sudo /home/pi/run.py
 
 Security Considerations:
 ------------------------
