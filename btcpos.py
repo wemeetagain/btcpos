@@ -1,12 +1,10 @@
 import requests
 import lcd
-import termios, fcntl, sys, os
 import qrencode
 from Tkinter import *
 import tkFont
 from time import sleep
 import threading
-import Queue
 
 class POS:
 	
@@ -50,19 +48,6 @@ class POS:
 			pass
 		return balance
 	
-	def otherAddressBalance(self,address,confirmations='0'):
-		payload = {'password': self.passwd,'address' : address, 'confirmations' : confirmations}
-		get_balance_url = 'https://blockchain.info/merchant/' + self.username + '/address_balance'
-		balance = -1		
-		try:
-			r = requests.get(get_balance_url, params=payload, verify=True)
-			print r.text
-			balance = eval(r.text,{},{})['balance']
-		except:
-			pass
-		return balance	
-		
-
 	#returns address balance or -1
 	def getAddressBalance(self,address,confirmations='0'):
 		get_balance_url = 'https://blockchain.info/q/addressbalance/' + address
@@ -129,9 +114,14 @@ class POS:
 		while True:
 			self.getPayment(self.amt)
 			if self.amt:	
-				if self.amt==str(eval(self.amt,{},{})) and not str(eval(self.amt,{},{})) == '0':
-					break
-				self.amt=str(eval(self.amt,{},{}))
+				try:
+					if eval(self.amt,{},{}) <= 0:
+						raise Exception('')
+					if self.amt==str(eval(self.amt,{},{})):
+						break
+					self.amt=str(eval(self.amt,{},{}))
+				except:
+					self.amt='0'
 		return self.amt
 
 	#gets a single payment line and puts it in self.amt
