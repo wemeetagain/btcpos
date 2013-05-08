@@ -92,14 +92,11 @@ class POS:
 	def toBTC(self,v,c='USD'):
 		payload = {'currency': c, 'value': v}
 		to_btc_url = 'https://blockchain.info/tobtc'
-		btotal=-1	
-		try:	
-			r = requests.get(to_btc_url, params=payload,verify=True)
-			if r.status_code == 200:
-				btotal=float(r.text)
-		except:
-			pass
-		return btotal
+		r = requests.get(to_btc_url, params=payload,verify=True)
+		if r.status_code == 200:
+			return float(r.text)
+		else:
+			return -1
 	
 	#returns last USD/BTC rate or -1
 	def getBTCRate():
@@ -318,7 +315,7 @@ class POS:
 					break
 			for x in range(retries):
 				bitamount=self.toBTC(amount)
-				if not bitamount == -1:
+				if bitamount:
 					break
 			if not address or not bitamount:
 				raise Exception('trouble accessing Blockchain')

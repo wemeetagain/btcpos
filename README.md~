@@ -21,7 +21,7 @@ Cashier Manual:
 ---------------
 * The display shows "Payment Amount". Type in total amount or calculate total then press enter.
 * The display shows "Payment Entered" followed by "QR Code Ready" when the QR code is ready for the customer.
-* If you need to cancel the payment, you can press Backspace three times in a row to cancel the transaction. The display will say "Payment Canceled", press enter to clear and begin a new transaction.
+* If you need to cancel the payment, you can press Backspace three times in a row to cancel the transaction. Display will say "Payment Canceled", press enter to clear and begin a new transaction.
 * Once the transaction is confirmed, the display shows "Transaction Approved".
 
 The Materials Used:
