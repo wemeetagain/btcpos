@@ -6,6 +6,8 @@ The cashier types payment total on a numpad, a QR code is generated for the cust
 
 The device is a numpad with a 2x16 character LCD display that a cashier interacts with, and a small LCD display facing the customer. 
 
+We have a short Youtube video demonstrating its usage: http://youtu.be/3uetgK0brgA
+
 The typical interaction in a business:
 --------------------------------------
 * Cashier asks how the customer will pay
