@@ -331,6 +331,7 @@ class POS:
                 self.lcd.printLCD()
                 self.enter=False
                 self.waitForEnter()
+                self.clearGUI()
                 return
             image=self.getQRCode(address,bitamount)
             self.clearGUI()
