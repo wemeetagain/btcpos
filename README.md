@@ -30,14 +30,17 @@ CSV log:
 --------
 Set file name in run.py to enable transaction log. The format is:
 (datetime,success,amount $,BTC address,BTC amount)
+
 *Datetime* transaction timestamp in ISO format YYYY-mm-dd HH:MM:SS . Uses local system clock, depends 
 on NTP synchronization and time zone being set up correctly.
+
 *Success* One of following values:
 * OK if payment went through. Filter on this if you want to see only successful 
   payments.
 * CANC if payment was cancelled by operator
 * BAD if the amount was too big (for whatever limit set by Blockchain.info) or 
   too small - less than 0.0001 BTC, to avoid problems with transaction fees.
+
 *BTC address* is address the customer paid to, not the forwarding address. Useful 
 for troubleshooting.
 
