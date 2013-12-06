@@ -324,6 +324,14 @@ class POS:
                     break
             if not address or not bitamount:
                 raise Exception('trouble accessing Blockchain')
+            #catch both too big (blockchain returns -1) and too small amounts
+            if bitamount < 0.0001:
+                self.logEntry('BAD',amount,address,bitamount)
+                self.lcd.setTopLine('Bad Amount')
+                self.lcd.printLCD()
+                self.enter=False
+                self.waitForEnter()
+                return
             image=self.getQRCode(address,bitamount)
             self.clearGUI()
             self.setPaymentGUI(image,address,bitamount,amount)
