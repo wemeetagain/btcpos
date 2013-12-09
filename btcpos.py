@@ -142,6 +142,8 @@ class POS:
                 last_input=self.input
                 self.lcd.setBottomLine('$'+last_input)
                 self.lcd.printBottomLine()
+            else:
+                sleep(0.05)
 
     def waitForPaymentOrCancel(self,address,bitamount,confirmations=0):
         confirmed=False
