@@ -118,6 +118,7 @@ Steps to set up Software Environment:
 
 Security Considerations:
 ------------------------
+* the blockchain.info identifier and password are stored on the device in plaintext -- don't store more money on the account than you can afford to lose
 * sending payments to a forwarding address currently defaults with a 0.0005BTC transaction fee
 * Don’t use a usb wireless adapter, use an ethernet cable. Using a wireless adapter is just asking for trouble from snoopers (even though all internet communication is supposedly encrypted over SSL)
 * Ideally, use an enclosure that doesn’t expose any ports to the pi.
